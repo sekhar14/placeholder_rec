@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 export function SemanticMatchVisual() {
@@ -30,7 +31,7 @@ export function SemanticMatchVisual() {
     },
   ];
 
-  const icons: Record<string, JSX.Element> = {
+  const icons: Record<string, ReactNode> = {
     code: (
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" strokeWidth="2">
         <path d="M16 18l6-6-6-6M8 6l-6 6 6 6" />

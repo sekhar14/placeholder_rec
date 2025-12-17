@@ -1,5 +1,6 @@
 "use client";
 
+import type { ReactNode } from "react";
 import { motion } from "framer-motion";
 
 export function GrowthReportVisual() {
@@ -20,7 +21,7 @@ export function GrowthReportVisual() {
     { title: "Mock System Design Practice", type: "Exercise", icon: "code" },
   ];
 
-  const icons: Record<string, JSX.Element> = {
+  const icons: Record<string, ReactNode> = {
     book: (
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink)" strokeWidth="1.5">
         <path d="M4 19.5A2.5 2.5 0 016.5 17H20" />

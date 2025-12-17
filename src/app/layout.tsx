@@ -22,21 +22,21 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clarion | Where Talent Meets Proof",
+  title: "Clarion | AI-Powered Hiring. Zero Ghosting.",
   description:
-    "The talent verification & relationship engine that cuts through the noise. Proof-based hiring, transparent feedback, and genuine connections.",
+    "Get matched with real opportunities. Get actionable feedback on every application. AI-powered recruitment that works for everyone.",
   keywords: [
-    "recruitment",
-    "hiring",
+    "AI recruitment",
+    "hiring platform",
     "talent verification",
     "skills assessment",
-    "AI recruitment",
     "job matching",
+    "career feedback",
   ],
   openGraph: {
-    title: "Clarion | Where Talent Meets Proof",
+    title: "Clarion | AI-Powered Hiring. Zero Ghosting.",
     description:
-      "The talent verification & relationship engine that cuts through the noise.",
+      "Get matched with real opportunities. Get actionable feedback on every application.",
     type: "website",
   },
 };

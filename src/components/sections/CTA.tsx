@@ -10,11 +10,36 @@ export function CTA() {
   const [userType, setUserType] = useState<UserType>(null);
   const [email, setEmail] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email && userType) {
+    if (!email || !userType) return;
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, user_type: userType }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
       setIsSubmitted(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to join waitlist");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,18 +130,33 @@ export function CTA() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email"
                   required
-                  className="flex-1 px-6 py-4 rounded-xl bg-white border border-mist text-ink placeholder:text-ash focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all"
+                  disabled={isLoading}
+                  className="flex-1 px-6 py-4 rounded-xl bg-white border border-mist text-ink placeholder:text-ash focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20 transition-all disabled:opacity-50"
                 />
                 <Button
                   type="submit"
                   variant="primary"
                   size="lg"
-                  className={`${!userType ? "opacity-50 cursor-not-allowed" : ""}`}
-                  disabled={!userType}
+                  className={`${!userType || isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                  disabled={!userType || isLoading}
                 >
-                  Get Early Access
+                  {isLoading ? (
+                    <span className="flex items-center gap-2">
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                      </svg>
+                      Joining...
+                    </span>
+                  ) : (
+                    "Request Invite"
+                  )}
                 </Button>
               </form>
+
+              {error && (
+                <p className="text-red-500 text-sm mt-4">{error}</p>
+              )}
 
               <p className="text-ash text-sm mt-4">
                 No spam, ever. We&apos;ll only reach out when we&apos;re ready.

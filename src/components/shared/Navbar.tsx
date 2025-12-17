@@ -63,12 +63,13 @@ export function Navbar() {
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Button variant="ghost" size="sm">
-              Sign In
-            </Button>
-            <Button variant="primary" size="sm">
-              Get Early Access
+          <div className="hidden lg:flex items-center gap-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ink/5 text-xs font-medium text-stone">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              Closed Beta
+            </span>
+            <Button variant="primary" size="sm" href="#cta">
+              Request Invite
             </Button>
           </div>
 
@@ -119,11 +120,12 @@ export function Navbar() {
                   </a>
                 ))}
                 <div className="pt-4 flex flex-col gap-3 border-t border-mist">
-                  <Button variant="outline" size="md" className="w-full">
-                    Sign In
-                  </Button>
-                  <Button variant="primary" size="md" className="w-full">
-                    Get Early Access
+                  <div className="flex items-center justify-center gap-2 py-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                    <span className="text-sm text-stone font-medium">Closed Beta</span>
+                  </div>
+                  <Button variant="primary" size="md" className="w-full" href="#cta">
+                    Request Invite
                   </Button>
                 </div>
               </div>

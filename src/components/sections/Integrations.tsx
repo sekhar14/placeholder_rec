@@ -7,7 +7,7 @@ export function Integrations() {
   return (
     <section className="py-20 bg-cloud relative overflow-hidden">
       {/* Subtle pattern */}
-      <div className="absolute inset-0 opacity-[0.015]">
+      <div className="absolute inset-0 opacity-[0.015] pointer-events-none">
         <div
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, var(--ink) 1px, transparent 0)`,

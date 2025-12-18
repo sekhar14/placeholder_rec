@@ -41,7 +41,7 @@ export function Solution() {
     <section id="how-it-works" className="py-24 lg:py-32 relative bg-ink text-white">
       {/* Subtle Background Pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
           backgroundImage: `radial-gradient(circle at 1px 1px, rgba(255,255,255,0.5) 1px, transparent 0)`,
           backgroundSize: "32px 32px",

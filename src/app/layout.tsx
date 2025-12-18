@@ -22,21 +22,24 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Clarion | AI-Powered Hiring. Zero Ghosting.",
+  title: "Clarion | AI-Powered Hiring for Recruiters",
   description:
-    "Get matched with real opportunities. Get actionable feedback on every application. AI-powered recruitment that works for everyone.",
+    "Upload resumes, add your JD, and let AI screen and rank candidates instantly. Never ghost a candidate again. Chrome extension coming soon.",
   keywords: [
+    "recruitment software",
     "AI recruitment",
-    "hiring platform",
-    "talent verification",
-    "skills assessment",
-    "job matching",
-    "career feedback",
+    "resume screening",
+    "candidate ranking",
+    "hiring automation",
+    "ATS alternative",
+    "recruiter tools",
+    "candidate management",
+    "hiring pipeline",
   ],
   openGraph: {
-    title: "Clarion | AI-Powered Hiring. Zero Ghosting.",
+    title: "Clarion | AI-Powered Hiring for Recruiters",
     description:
-      "Get matched with real opportunities. Get actionable feedback on every application.",
+      "Upload resumes and JDs. AI screens and ranks candidates instantly. Zero ghosted candidates.",
     type: "website",
   },
 };

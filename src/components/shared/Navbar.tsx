@@ -6,10 +6,8 @@ import { Container, Button } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
-  { label: "How It Works", href: "#how-it-works" },
   { label: "Features", href: "#features" },
-  { label: "For Candidates", href: "#for-candidates" },
-  { label: "For Companies", href: "#for-companies" },
+  { label: "How It Works", href: "#how-it-works" },
 ];
 
 export function Navbar() {
@@ -65,11 +63,11 @@ export function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-4">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-ink/5 text-xs font-medium text-stone">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-              Closed Beta
+              <span className="w-1.5 h-1.5 rounded-full bg-verify animate-pulse" />
+              For Recruiters
             </span>
             <Button variant="primary" size="sm" href="#cta">
-              Request Invite
+              Get Early Access
             </Button>
           </div>
 
@@ -121,11 +119,11 @@ export function Navbar() {
                 ))}
                 <div className="pt-4 flex flex-col gap-3 border-t border-mist">
                   <div className="flex items-center justify-center gap-2 py-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-                    <span className="text-sm text-stone font-medium">Closed Beta</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-verify animate-pulse" />
+                    <span className="text-sm text-stone font-medium">For Recruiters</span>
                   </div>
                   <Button variant="primary" size="md" className="w-full" href="#cta">
-                    Request Invite
+                    Get Early Access
                   </Button>
                 </div>
               </div>

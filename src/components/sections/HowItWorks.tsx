@@ -1,57 +1,126 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 
-const candidateSteps = [
+const steps = [
   {
     step: 1,
-    title: "Take AI Challenges",
-    description: "Complete adaptive micro-challenges. AI generates questions based on your claimed skills and experience level.",
-    aiLabel: "AI-Generated",
+    title: "Upload or Capture",
+    description: "Upload resumes and your JD directly, or use our Chrome extension to capture candidates from anywhere.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+        <polyline points="17,8 12,3 7,8" />
+        <line x1="12" y1="3" x2="12" y2="15" />
+      </svg>
+    ),
+    visual: (
+      <div className="flex items-center justify-center gap-3">
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="w-8 h-8 rounded-lg bg-accent-muted flex items-center justify-center"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+          </svg>
+        </motion.div>
+        <span className="text-stone text-xs">+</span>
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="w-8 h-8 rounded-lg bg-cloud flex items-center justify-center"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="4" />
+          </svg>
+        </motion.div>
+      </div>
+    ),
   },
   {
     step: 2,
-    title: "Get AI-Verified",
-    description: "Receive your verified skill profile with detailed scores. AI evaluates not just answers, but your problem-solving approach.",
-    aiLabel: "AI-Analyzed",
+    title: "AI Parses & Matches",
+    description: "Our AI extracts skills, experience, and qualifications—then matches candidates against your job description.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="3" />
+        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+      </svg>
+    ),
+    visual: (
+      <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-verify/10 text-verify text-xs font-mono font-bold">
+          96%
+        </div>
+        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-ink/10 text-ink text-xs font-mono font-bold">
+          89%
+        </div>
+        <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-ink/10 text-ink text-xs font-mono font-bold">
+          84%
+        </div>
+      </div>
+    ),
   },
   {
     step: 3,
-    title: "Match & Feedback",
-    description: "AI matches you to roles across 20+ dimensions. Even if not selected, receive a personalized Growth Report.",
-    aiLabel: "AI-Matched",
+    title: "Review & Manage",
+    description: "See ranked candidates in your pipeline. Move them through stages, schedule interviews, collaborate with your team.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="3" width="7" height="9" rx="1" />
+        <rect x="14" y="3" width="7" height="5" rx="1" />
+        <rect x="14" y="12" width="7" height="9" rx="1" />
+        <rect x="3" y="16" width="7" height="5" rx="1" />
+      </svg>
+    ),
+    visual: (
+      <div className="flex items-center gap-1">
+        {["New", "Screen", "Interview", "Offer"].map((stage, i) => (
+          <div
+            key={stage}
+            className={`px-2 py-1 rounded text-[10px] font-medium ${
+              i === 2 ? "bg-accent text-white" : "bg-cloud text-charcoal"
+            }`}
+          >
+            {stage}
+          </div>
+        ))}
+      </div>
+    ),
   },
-];
-
-const companySteps = [
   {
-    step: 1,
-    title: "Post & Quality Check",
-    description: "Post your role. AI scores your job description for clarity and flags issues that reduce candidate quality.",
-    aiLabel: "AI-Scored",
-  },
-  {
-    step: 2,
-    title: "AI Screens & Ranks",
-    description: "AI filters by verified skills and intent signals. Review anonymous profiles ranked by technical and culture fit.",
-    aiLabel: "AI-Ranked",
-  },
-  {
-    step: 3,
-    title: "Interview Best Fits",
-    description: "Book interviews with bias-free, pre-verified candidates. AI provides suggested questions based on skill gaps.",
-    aiLabel: "AI-Assisted",
+    step: 4,
+    title: "Hire & Notify",
+    description: "Make your hire. Every candidate automatically gets status updates—no one gets ghosted.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+        <path d="M22 4L12 14.01l-3-3" />
+      </svg>
+    ),
+    visual: (
+      <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-verify/10 text-verify text-xs font-medium">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+          <path d="M22 4L12 14.01l-3-3" />
+        </svg>
+        0 ghosted
+      </div>
+    ),
   },
 ];
 
 export function HowItWorks() {
-  const [activeTab, setActiveTab] = useState<"candidates" | "companies">("candidates");
-  const steps = activeTab === "candidates" ? candidateSteps : companySteps;
-
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden">
+    <section id="how-it-works" className="py-24 lg:py-32 bg-paper relative overflow-hidden">
       {/* Subtle Background */}
       <div
         className="absolute inset-0 opacity-[0.02] pointer-events-none"
@@ -62,8 +131,8 @@ export function HowItWorks() {
       />
 
       <Container>
-        {/* Editorial Header */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
+        {/* Section Header */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -72,106 +141,89 @@ export function HowItWorks() {
           >
             <span className="caption text-stone inline-flex items-center gap-2 justify-center mb-4">
               <span className="w-6 h-px bg-accent" />
-              AI-Powered Process
+              How It Works
               <span className="w-6 h-px bg-accent" />
             </span>
-            <h2 className="font-display heading-1 text-ink mb-5">
-              How <span className="text-accent-gradient">AI</span> Works For You
+            <h2 className="font-display display-md text-ink mb-5">
+              From resume to <span className="text-accent-gradient">hire</span> in 4 steps.
             </h2>
-            <p className="body-md text-stone max-w-xl mx-auto">
-              Three AI-driven steps that transform how you find or fill roles—with transparency at every stage.
+            <p className="body-lg text-stone">
+              Simple workflow. Powerful AI. Zero ghosted candidates.
             </p>
           </motion.div>
         </div>
 
-        {/* Tab Toggle */}
+        {/* Steps Grid */}
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+            {/* Connecting Line (Desktop) */}
+            <div className="hidden lg:block absolute top-16 left-[12%] right-[12%] h-px bg-mist" />
+
+            {steps.map((step, index) => (
+              <motion.div
+                key={step.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="text-center relative"
+              >
+                {/* Step Number Circle */}
+                <div className="relative mx-auto mb-6">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.1 }}
+                    className="w-16 h-16 rounded-full bg-white border-2 border-ink flex items-center justify-center relative z-10 mx-auto"
+                  >
+                    <span className="text-ink">{step.icon}</span>
+                  </motion.div>
+                  {/* Step Number Badge */}
+                  <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-accent text-white text-xs font-bold flex items-center justify-center">
+                    {step.step}
+                  </span>
+                </div>
+
+                {/* Arrow Between Steps (Mobile) */}
+                {index < steps.length - 1 && (
+                  <div className="lg:hidden flex justify-center my-4 md:hidden">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--mist)" strokeWidth="2">
+                      <path d="M12 5v14M5 12l7 7 7-7" />
+                    </svg>
+                  </div>
+                )}
+
+                <h3 className="heading-3 text-ink mb-2">{step.title}</h3>
+                <p className="text-stone text-sm leading-relaxed mb-4 max-w-xs mx-auto">
+                  {step.description}
+                </p>
+
+                {/* Visual Indicator */}
+                <div className="flex justify-center">{step.visual}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Bottom CTA Hint */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex justify-center mb-16"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 text-center"
         >
-          <div className="inline-flex p-1 rounded-full bg-cloud border border-mist">
-            <button
-              onClick={() => setActiveTab("candidates")}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
-                activeTab === "candidates"
-                  ? "bg-ink text-white shadow-sm"
-                  : "text-stone hover:text-ink"
-              }`}
-            >
-              For Candidates
-            </button>
-            <button
-              onClick={() => setActiveTab("companies")}
-              className={`px-6 py-3 rounded-full text-sm font-medium transition-all ${
-                activeTab === "companies"
-                  ? "bg-ink text-white shadow-sm"
-                  : "text-stone hover:text-ink"
-              }`}
-            >
-              For Companies
-            </button>
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-cloud border border-mist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--verify)" strokeWidth="2">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+              <path d="M22 4L12 14.01l-3-3" />
+            </svg>
+            <span className="text-sm text-charcoal">
+              Get started in <span className="font-mono font-bold text-ink">under 2 minutes</span>
+            </span>
           </div>
         </motion.div>
-
-        {/* Horizontal Steps */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.4 }}
-            className="max-w-5xl mx-auto"
-          >
-            <div className="grid md:grid-cols-3 gap-8 relative">
-              {/* Connecting Line (Desktop) */}
-              <div className="hidden md:block absolute top-12 left-[16%] right-[16%] h-px bg-mist" />
-
-              {steps.map((step, index) => (
-                <motion.div
-                  key={step.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.15 }}
-                  className="text-center relative"
-                >
-                  {/* Step Number with AI Badge */}
-                  <div className="relative mx-auto mb-6">
-                    <div className="w-20 h-20 rounded-full bg-white border-2 border-mist flex items-center justify-center relative z-10">
-                      <span className="font-display text-3xl text-ink">{step.step}</span>
-                    </div>
-                    {/* AI Label */}
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-full bg-ink text-white text-xs font-medium whitespace-nowrap">
-                      {step.aiLabel}
-                    </span>
-                  </div>
-
-                  {/* Arrow (Mobile) */}
-                  {index < steps.length - 1 && (
-                    <div className="md:hidden flex justify-center my-4">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--mist)" strokeWidth="2">
-                        <path d="M12 5v14M5 12l7 7 7-7" />
-                      </svg>
-                    </div>
-                  )}
-
-                  <h3 className="font-display heading-3 text-ink mb-2">{step.title}</h3>
-                  <p className="text-stone text-sm leading-relaxed max-w-xs mx-auto">
-                    {step.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Decorative Editorial Number */}
-        <div className="absolute -bottom-20 -right-10 font-display text-[20rem] text-mist/50 italic leading-none pointer-events-none select-none hidden lg:block">
-          3
-        </div>
       </Container>
     </section>
   );

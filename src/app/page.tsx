@@ -1,12 +1,10 @@
 import { Navbar, Footer } from "@/components/shared";
 import {
   Hero,
+  Integrations,
   Problem,
-  Solution,
   Features,
-  BiasShield,
-  TwoPaths,
-  HowItWorks,
+  InteractiveDemo,
   CTA,
 } from "@/components/sections";
 
@@ -16,12 +14,10 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Integrations />
         <Problem />
-        <Solution />
         <Features />
-        <BiasShield />
-        <TwoPaths />
-        <HowItWorks />
+        <InteractiveDemo />
         <CTA />
       </main>
       <Footer />

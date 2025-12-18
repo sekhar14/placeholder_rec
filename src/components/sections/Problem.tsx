@@ -3,168 +3,131 @@
 import { motion } from "framer-motion";
 import { Container } from "@/components/ui";
 
-const problems = [
+const painPoints = [
   {
-    audience: "Candidates",
-    number: "01",
-    title: "Ghosted & Dehumanized",
-    description:
-      "You spend hours crafting applications, only to be rejected by an algorithm without ever knowing why. No feedback, no closure.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
+    ),
+    title: "Scattered Data",
+    description: "Resumes in email, spreadsheets everywhere, no single source of truth for candidates.",
+    stat: "5+",
+    statLabel: "tools to manage"
   },
   {
-    audience: "Companies",
-    number: "02",
-    title: "Hiring Resume Writers",
-    description:
-      "Your AI filters applicants based on keywords, so you end up hiring the best resume optimizers—not the best talent.",
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+      </svg>
+    ),
+    title: "Duplicate Work",
+    description: "Same candidate applies multiple times. You end up reviewing them again and again.",
+    stat: "30%",
+    statLabel: "are duplicates"
   },
   {
-    audience: "Everyone",
-    number: "03",
-    title: "Bots Talking to Bots",
-    description:
-      "AI writes resumes. AI filters resumes. The human signal is lost in a dead internet loop where neither side wins.",
-    featured: true,
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12,6 12,12 16,14" />
+      </svg>
+    ),
+    title: "Hours of Manual Screening",
+    description: "Reading 100+ resumes for one role. Most don't even match basic requirements.",
+    stat: "12+",
+    statLabel: "hours per hire"
+  },
+  {
+    icon: (
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+        <path d="M8 10h.01M12 10h.01M16 10h.01" />
+      </svg>
+    ),
+    title: "Candidate Ghosting",
+    description: "No time to respond to everyone. Your employer brand suffers silently.",
+    stat: "85%",
+    statLabel: "never hear back"
   },
 ];
 
 export function Problem() {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden bg-cloud">
+    <section className="py-24 lg:py-32 bg-paper relative overflow-hidden">
       <Container>
-        {/* Editorial Header */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="caption text-stone inline-flex items-center gap-2 mb-6">
-              <span className="w-8 h-px bg-accent" />
-              The Problem
-            </span>
-            <h2 className="font-display heading-1 text-ink">
-              The Recruitment{" "}
-              <span className="relative inline-block">
-                <span className="italic">Black Hole</span>
-                <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-ink/20" />
-              </span>
-            </h2>
-          </motion.div>
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
+        >
+          <span className="caption text-stone inline-flex items-center gap-2 mb-4">
+            <span className="w-6 h-px bg-accent" />
+            The Problem
+          </span>
+          <h2 className="font-display display-md text-ink mb-5">
+            Recruiting is{" "}
+            <span className="text-accent-gradient italic">broken.</span>
+          </h2>
+          <p className="body-lg text-stone">
+            Resumes pile up. Great candidates slip through the cracks. And 85% of applicants
+            never hear back—damaging your employer brand with every silence.
+          </p>
+        </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex items-end"
-          >
-            <p className="body-md text-stone max-w-md">
-              Current platforms have digitized the filing cabinet but
-              inadvertently created a &ldquo;Spam Cannon&rdquo; where quantity
-              trumps quality on both sides.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Asymmetric Problem Cards */}
-        <div className="grid lg:grid-cols-3 gap-6">
-          {/* First two cards - smaller */}
-          {problems.slice(0, 2).map((problem, index) => (
+        {/* Pain Points Grid */}
+        <div className="grid sm:grid-cols-2 gap-6 lg:gap-8">
+          {painPoints.map((point, i) => (
             <motion.div
-              key={problem.title}
-              initial={{ opacity: 0, y: 30 }}
+              key={point.title}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="card p-8 relative group"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group"
             >
-              {/* Editorial Number */}
-              <span className="font-display text-6xl text-mist absolute top-6 right-6 italic">
-                {problem.number}
-              </span>
-
-              <span className="caption text-ash mb-6 block">{problem.audience}</span>
-
-              <h3 className="font-display heading-3 text-ink mb-4 relative z-10">
-                {problem.title}
-              </h3>
-              <p className="text-stone leading-relaxed relative z-10">
-                {problem.description}
-              </p>
+              <div className="card p-6 lg:p-8 h-full transition-all duration-300 hover:shadow-lg hover:border-stone/20">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-cloud flex items-center justify-center text-charcoal group-hover:bg-accent-muted group-hover:text-accent transition-colors">
+                    {point.icon}
+                  </div>
+                  <div className="text-right">
+                    <p className="font-mono text-2xl font-bold text-ink">{point.stat}</p>
+                    <p className="text-xs text-ash">{point.statLabel}</p>
+                  </div>
+                </div>
+                <h3 className="heading-3 text-ink mb-2">{point.title}</h3>
+                <p className="body-sm text-stone">{point.description}</p>
+              </div>
             </motion.div>
           ))}
-
-          {/* Featured card - larger */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="card-featured p-8 relative lg:row-span-1"
-          >
-            <span className="font-display text-6xl text-accent/20 absolute top-6 right-6 italic">
-              03
-            </span>
-
-            <span className="caption text-accent mb-6 block">Everyone</span>
-
-            <h3 className="font-display heading-3 text-ink mb-4">
-              Bots Talking to Bots
-            </h3>
-            <p className="text-stone leading-relaxed mb-8">
-              AI writes resumes. AI filters resumes. The human signal is lost in a dead internet loop where neither side wins.
-            </p>
-
-            {/* Mini Loop Visualization */}
-            <div className="flex items-center justify-between gap-4 pt-6 border-t border-mist">
-              <div className="text-center">
-                <div className="w-10 h-10 rounded-full bg-cloud flex items-center justify-center mx-auto mb-2">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="1.5">
-                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                    <circle cx="12" cy="7" r="4" />
-                  </svg>
-                </div>
-                <span className="text-xs text-ash">Candidate</span>
-              </div>
-
-              <div className="flex-1 relative h-8">
-                <motion.div
-                  animate={{ x: [0, 10, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="absolute top-1/2 left-0 right-0 h-px bg-mist"
-                />
-                <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-xs text-ash bg-white px-2">
-                  AI ↔ AI
-                </span>
-              </div>
-
-              <div className="text-center">
-                <div className="w-10 h-10 rounded-full bg-cloud flex items-center justify-center mx-auto mb-2">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--charcoal)" strokeWidth="1.5">
-                    <path d="M3 21h18M5 21V7l8-4v18M13 21V3l6 3v15" />
-                  </svg>
-                </div>
-                <span className="text-xs text-ash">Company</span>
-              </div>
-            </div>
-          </motion.div>
         </div>
 
-        {/* Transition */}
+        {/* Bottom Callout */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-20 text-center"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 p-6 lg:p-8 rounded-2xl bg-ink text-white text-center"
         >
-          <div className="inline-flex items-center gap-4">
-            <span className="w-12 h-px bg-mist" />
-            <span className="text-stone italic">There&apos;s a better way.</span>
-            <span className="w-12 h-px bg-mist" />
-          </div>
+          <p className="body-lg text-white/80 mb-2">
+            The average recruiter spends
+          </p>
+          <p className="font-display text-4xl lg:text-5xl font-semibold mb-2">
+            23 hours/week
+          </p>
+          <p className="body-md text-white/60">
+            on administrative tasks instead of actually hiring.
+          </p>
         </motion.div>
       </Container>
     </section>
